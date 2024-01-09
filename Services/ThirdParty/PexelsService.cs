@@ -15,7 +15,5 @@ public class PexelsService
     }
 
     public async Task<CollectionMediaPage> GetCollection(string id)
-    {
-        return await _pexelsClient.GetCollectionAsync(id: id, type: "photos");
-    }
+        => await _pexelsClient.GetCollectionAsync(id: id, type: "photos");
 }

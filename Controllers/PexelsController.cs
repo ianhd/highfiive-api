@@ -15,6 +15,6 @@ public class PexelsController : ControllerBase
     }
 
     [HttpGet("pexels/collection")]
-    public async Task<IActionResult> GetCollection(string id)
-        => Ok(await _pexelsService.GetCollection(id));
+    public async Task<IActionResult> GetCollection(int occasionId)
+        => Ok(await _pexelsService.GetCollection("zvfgiyn"));
 }

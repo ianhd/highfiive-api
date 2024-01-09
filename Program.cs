@@ -24,6 +24,8 @@ services.AddSingleton<GoogleService>();
 services.AddSingleton<DapperContext>();
 services.AddSingleton<UserRepo>();
 services.AddSingleton<UserService>();
+services.AddSingleton<BoardRepo>();
+services.AddSingleton<BoardService>();
 services.AddSingleton<PexelsService>();
 
 services.AddCors();
