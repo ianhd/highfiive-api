@@ -1,6 +1,7 @@
 ﻿using Api.Models;
 using Api.Services;
 using Api.Services.ThirdParty;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,17 @@ public class BoardController : ControllerBase
     }
 
     [HttpPost("board")]
-    public async Task<IActionResult> SaveBoard(Board item)
-        => Ok(await _boardService.Insert(item));
+    public async Task<IActionResult> InsertBoard(Board item)
+    {
+        var userId = (int)Request.HttpContext.Items["UserId"];
+        item.user_id = userId;
+        return Ok(await _boardService.Insert(item));
+    }
+
+    [HttpGet("boards"), AllowAnonymous]
+    public async Task<IActionResult> GetUserBoards()
+    {
+        var userId = 1;
+        return Ok(await _boardService.GetAll(1));
+    }
 }

@@ -16,5 +16,10 @@ namespace Api.Services
         {
             return await _boardRepo.Insert(item);
         }
+
+        public async Task<List<Board>> GetAll(int user_id)
+        {
+            return await _boardRepo.GetAll(user_id);
+        }
     }
 }

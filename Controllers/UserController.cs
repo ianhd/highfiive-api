@@ -1,4 +1,5 @@
 ﻿using Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Ocsp;
@@ -15,7 +16,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("user/auth")]
+    [HttpGet("user/auth"), AllowAnonymous]
     public async Task<IActionResult> GetJwt(string accessToken)
     {
         var jwt = await _userService.Save(accessToken);
