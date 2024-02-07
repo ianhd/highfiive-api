@@ -2,6 +2,7 @@
 using Api.Services;
 using Api.Services.ThirdParty;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,15 +21,29 @@ public class BoardController : ControllerBase
     [HttpPost("board")]
     public async Task<IActionResult> InsertBoard(Board item)
     {
-        var userId = (int)Request.HttpContext.Items["UserId"];
-        item.user_id = userId;
+        if(item.pexels_photo_id == 0)
+        {
+            throw new Exception("pexels_photo_id is 0");
+        }
+        var user_id = (int)Request.HttpContext.Items["UserId"];
+        item.user_id = user_id;
         return Ok(await _boardService.Insert(item));
     }
 
-    [HttpGet("boards"), AllowAnonymous]
+    [HttpGet("board/{board_eid}"), AllowAnonymous]
+    public async Task<IActionResult> GetBoard(string board_eid)
+    {
+        return Ok(await _boardService.Get(board_eid));
+    }
+
+    [HttpGet("board-del/{board_eid}"), AllowAnonymous]
+    public async Task DeleteBoard(string board_eid)
+        => await _boardService.Delete(board_eid);
+
+    [HttpGet("boards")]
     public async Task<IActionResult> GetUserBoards()
     {
-        var userId = 1;
-        return Ok(await _boardService.GetAll(1));
+        var user_id = (int)Request.HttpContext.Items["UserId"];
+        return Ok(await _boardService.GetAll(user_id));
     }
 }

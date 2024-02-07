@@ -1,4 +1,7 @@
-﻿using Api.Services.ThirdParty;
+﻿using Api.Models;
+using Api.Services.ThirdParty;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +17,17 @@ public class PexelsController : ControllerBase
         _pexelsService = pexelsService;
     }
 
-    [HttpGet("pexels/collection")]
+    [HttpGet("pexels/collection"), AllowAnonymous]
     public async Task<IActionResult> GetCollection(int occasionId)
-        => Ok(await _pexelsService.GetCollection("zvfgiyn"));
+    {
+        var data = await _pexelsService.GetCollection("zvfgiyn");
+        return Ok(new SearchResultsPage(data));
+    }
+
+    [HttpGet("pexels/search"), AllowAnonymous]
+    public async Task<IActionResult> Search(string q, int page = 1)
+    {
+        var data = await _pexelsService.Search(q, page);
+        return Ok(new SearchResultsPage(data));
+    }
 }
