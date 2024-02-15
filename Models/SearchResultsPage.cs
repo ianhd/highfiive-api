@@ -27,7 +27,12 @@ public class SearchResultsPage
     {
         foreach(var item in giphySearchResponse.data)
         {
-            Results.Add(new Result(null, item.images.original.webp));
+            var height = 0;
+            try
+            {
+                height = int.Parse(item.images.original.height);
+            }catch { }
+            Results.Add(new Result(height.ToString(), item.images.original.webp));
         }
     }
 }

@@ -13,6 +13,7 @@ public class Post
     public int board_id { get; set; }
     public string body { get; set; }
     public string giphy_image { get; set; }
+    public int? giphy_original_height { get; set; }
     public string body_friendly
     {
         get

@@ -3,6 +3,7 @@
 public class OriginalImage
 {
     public string webp { get; set; }
+    public string height { get; set; }
 }
 
 public class ImagesObj

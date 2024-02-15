@@ -34,9 +34,9 @@ order by sort_order
 
         var sql = @"
 insert into post
-    (board_id, body, from_name, giphy_image)
+    (board_id, body, from_name, giphy_image, giphy_original_height)
 values
-    (@board_id, @body, @from_name, @giphy_image)
+    (@board_id, @body, @from_name, @giphy_image, @giphy_original_height)
         ";
 
         await conn.ExecuteAsync(sql, item);
