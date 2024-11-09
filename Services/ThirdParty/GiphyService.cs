@@ -24,9 +24,8 @@ public class GiphyService
         return await _client.GetFromJsonAsync<GiphySearchResponse>(url);
     }
 
-    public async Task<GiphySearchResponse> Search(string q, int page = 1)
+    public async Task<GiphySearchResponse> Search(string q, int page, int limit)
     {
-        var limit = 12;
         var offset = (page-1) * limit;
         var url = $"search?api_key={_apiKey}&q={q}&limit={limit}&offset={offset}&rating=g&lang=en&bundle=messaging_non_clips";
 

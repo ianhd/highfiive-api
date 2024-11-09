@@ -7,8 +7,11 @@ public class SearchResultsPage
     public record Result (string key, string value);
     public List<Result> Results { get; set; } = new List<Result> ();
 
-    public SearchResultsPage(PexelsSearchResultsPage pexelsSearchResultsPage)
+    public string Query { get; set; }
+
+    public SearchResultsPage(PexelsSearchResultsPage pexelsSearchResultsPage, string query)
     {
+        Query = query;
         foreach (var item in pexelsSearchResultsPage.photos)
         {
             Results.Add(new Result(item.id.ToString(), item.src.tiny));

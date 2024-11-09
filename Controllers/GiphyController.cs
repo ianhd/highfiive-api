@@ -25,9 +25,9 @@ public class GiphyController : ControllerBase
     }
 
     [HttpGet("giphy/search"), AllowAnonymous]
-    public async Task<IActionResult> Search(string q, int page = 1)
+    public async Task<IActionResult> Search(string q, int page = 1, int limit = 12)
     {
-        var data = await _giphyService.Search(q, page);
+        var data = await _giphyService.Search(q, page, limit);
         return Ok(new SearchResultsPage(data));
     }
 }

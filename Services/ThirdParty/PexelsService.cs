@@ -1,4 +1,5 @@
-﻿using Api.Models.Api;
+﻿using Api.Models;
+using Api.Models.Api;
 namespace Api.Services.ThirdParty;
 
 public class PexelsService
@@ -21,6 +22,22 @@ public class PexelsService
     public async Task<PexelsPhoto> GetPhoto(int id)
         => await _client.GetFromJsonAsync<PexelsPhoto>($"photos/{id}");
 
-    public async Task<PexelsSearchResultsPage> Search(string q, int page = 1)
-        => await _client.GetFromJsonAsync<PexelsSearchResultsPage>($"search?query={q}&per_page=16&page={page}");
+    public async Task<PexelsSearchResultsPage> Search(string q, int page, int per_page)
+        => await _client.GetFromJsonAsync<PexelsSearchResultsPage>($"search?query={q}&per_page={per_page}&page={page}");
+
+    public async Task<List<SearchResultsPage>> GetOccasionCollections(int occasionId)
+    {
+        var rtn = new List<SearchResultsPage>();
+
+        // for now just assume Birthday
+        var searchQueries = "balloons,cupcakes";
+        foreach(var query in searchQueries.Split(',').ToList())
+        {
+            var data = await Search(query, 1, 4);
+            var results = new SearchResultsPage(data, query);
+            rtn.Add(results);
+        }
+
+        return rtn;
+    }
 }

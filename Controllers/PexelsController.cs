@@ -25,9 +25,16 @@ public class PexelsController : ControllerBase
     }
 
     [HttpGet("pexels/search"), AllowAnonymous]
-    public async Task<IActionResult> Search(string q, int page = 1)
+    public async Task<IActionResult> Search(string q, int page = 1, int limit = 16)
     {
-        var data = await _pexelsService.Search(q, page);
-        return Ok(new SearchResultsPage(data));
+        var data = await _pexelsService.Search(q, page, limit);
+        return Ok(new SearchResultsPage(data, q));
+    }
+
+    [HttpGet("pexels/occasion-collections"), AllowAnonymous]
+    public async Task<IActionResult> GetOccasionCollections(int occasionId)
+    {
+        var data = await _pexelsService.GetOccasionCollections(occasionId);
+        return Ok(data);
     }
 }
