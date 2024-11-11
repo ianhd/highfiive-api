@@ -7,6 +7,8 @@ public class PexelsCollectionPage
 public class PexelsPhoto
 {
     public int id { get; set; }
+    public int width { get; set; }
+    public int height { get; set; }
     public Src src { get; set; }
 }
 

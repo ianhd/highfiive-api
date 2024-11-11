@@ -25,16 +25,16 @@ public class PexelsService
     public async Task<PexelsSearchResultsPage> Search(string q, int page, int per_page)
         => await _client.GetFromJsonAsync<PexelsSearchResultsPage>($"search?query={q}&per_page={per_page}&page={page}");
 
-    public async Task<List<SearchResultsPage>> GetOccasionCollections(int occasionId)
+    public async Task<List<SearchResultsPageV2>> GetOccasionCollections(int occasionId)
     {
-        var rtn = new List<SearchResultsPage>();
+        var rtn = new List<SearchResultsPageV2>();
 
         // for now just assume Birthday
         var searchQueries = "balloons,cupcakes";
         foreach(var query in searchQueries.Split(',').ToList())
         {
             var data = await Search(query, 1, 4);
-            var results = new SearchResultsPage(data, query);
+            var results = new SearchResultsPageV2(data, query);
             rtn.Add(results);
         }
 

@@ -4,6 +4,7 @@ public class OriginalImage
 {
     public string webp { get; set; }
     public string height { get; set; }
+    public string width { get; set; }
 }
 
 public class ImagesObj
@@ -13,6 +14,7 @@ public class ImagesObj
 
 public class DataItem
 {
+    public string id { get; set; }
     public ImagesObj images { get; set; }
 }
 

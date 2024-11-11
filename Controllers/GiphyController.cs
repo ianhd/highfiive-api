@@ -21,13 +21,13 @@ public class GiphyController : ControllerBase
     public async Task<IActionResult> Trending()
     {
         var data = await _giphyService.GetTrending();
-        return Ok(new SearchResultsPage(data));
+        return Ok(new SearchResultsPageV2(data));
     }
 
     [HttpGet("giphy/search"), AllowAnonymous]
     public async Task<IActionResult> Search(string q, int page = 1, int limit = 12)
     {
         var data = await _giphyService.Search(q, page, limit);
-        return Ok(new SearchResultsPage(data));
+        return Ok(new SearchResultsPageV2(data));
     }
 }
