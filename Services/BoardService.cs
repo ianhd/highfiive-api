@@ -41,6 +41,13 @@ namespace Api.Services
             return data;
         }
 
+        public async Task<string> DbPing()
+        {
+            var count = await _boardRepo.DbPing();
+            var msg = $"{count} board record(s).";
+            return msg;
+        }
+
         public async Task<Board> Get(string board_eid)
         {
             var board_id = _hashIdsService.Decode(board_eid);

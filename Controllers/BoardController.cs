@@ -1,9 +1,6 @@
 ﻿using Api.Models;
 using Api.Services;
-using Api.Services.ThirdParty;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

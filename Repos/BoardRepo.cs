@@ -16,6 +16,15 @@ public class BoardRepo : _BaseRepo
         ", new { board_id });
     }
 
+    public async Task<int> DbPing()
+    {
+        using var conn = _context.CreateConnection();
+        var count = await conn.QueryFirstOrDefaultAsync<int>(@"
+            select count(board_id) from board
+        ");
+        return count;
+    }
+
     public async Task<Board> Get(int board_id)
     {
         using var conn = _context.CreateConnection();
