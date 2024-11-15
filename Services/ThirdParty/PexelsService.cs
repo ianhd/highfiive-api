@@ -30,7 +30,17 @@ public class PexelsService
         var rtn = new List<SearchResultsPageV2>();
 
         // for now just assume Birthday
-        var searchQueries = "balloons,cupcakes";
+        var searchQueries = string.Empty;
+        
+        switch(occasionId)
+        {
+            case 1: 
+                searchQueries = "balloons,cupcakes";
+                break;
+            case 2:
+                searchQueries = "flowers";
+                break;
+        }
         foreach(var query in searchQueries.Split(',').ToList())
         {
             var data = await Search(query, 1, 4);
