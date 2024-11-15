@@ -24,6 +24,6 @@ public class PostController : ControllerBase
         => await _postService.Delete(post_eid);
 
     [HttpGet("posts"), AllowAnonymous]
-    public async Task<List<Post>> GetPostsForBoard(string board_eid)
+    public async Task<List<Models.Response.PostR>> GetPostsForBoard(string board_eid)
         => await _postService.GetForBoard(board_eid);
 }

@@ -27,10 +27,13 @@ namespace Api.Services
             await _postRepo.Delete(post_id);
         }
 
-        public async Task<List<Post>> GetForBoard(string board_eid)
+        public async Task<List<Models.Response.PostR>> GetForBoard(string board_eid)
         {
             var board_id = _hashIdsService.Decode(board_eid);
-            return await _postRepo.GetForBoard(board_id);
+            var data = await _postRepo.GetForBoard(board_id);
+            return data
+                .Select(x => new Models.Response.PostR(x))
+                .ToList();
         }
     }
 }
