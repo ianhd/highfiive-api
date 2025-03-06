@@ -1,15 +1,13 @@
 //using Api.Repos;
-using Api.Services.ThirdParty;
-using Api.Services;
 using Api;
-using Api.Middleware;
-using Microsoft.OpenApi.Models;
-using Api.Models;
 using Api.Controllers;
-using Microsoft.Extensions.DependencyInjection;
+using Api.Middleware;
 using Api.Repos;
-using System.Reflection;
+using Api.Services;
+using Api.Services.ThirdParty;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +21,13 @@ services.AddCors(o => o.AddDefaultPolicy(builder =>
            .AllowAnyHeader();
 }));
 
-var currentAssembly = typeof(UserController).GetTypeInfo().Assembly;
-
 services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
 
+// I bet if we removed this part everything will still work
+var currentAssembly = typeof(UserController).GetTypeInfo().Assembly;
 services.AddControllers()
     .AddApplicationPart(currentAssembly);
 

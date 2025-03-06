@@ -4,7 +4,7 @@ namespace Api.Models;
 
 public class SearchResultsPageV2
 {
-    public record Result(string id, int width, int height, string url)
+    public record Result(string id, int width, int height, string url, string portraitUrl, string landscapeUrl)
     {
         //public double aspectRatio => Math.Round((double)width / height, 2);
     };
@@ -17,15 +17,7 @@ public class SearchResultsPageV2
         Query = query;
         foreach (var item in pexelsSearchResultsPage.photos)
         {
-            Results.Add(new Result(item.id.ToString(), item.width, item.height, item.src.tiny));
-        }
-    }
-
-    public SearchResultsPageV2(PexelsCollectionPage pexelsCollectionPage)
-    {
-        foreach (var item in pexelsCollectionPage.media)
-        {
-            Results.Add(new Result(item.id.ToString(), item.width, item.height, item.src.large));
+            Results.Add(new Result(item.id.ToString(), item.width, item.height, item.src.tiny, item.src.portrait, item.src.landscape));
         }
     }
 
@@ -41,7 +33,7 @@ public class SearchResultsPageV2
                 height = int.Parse(item.images.original.height);
             }
             catch { }
-            Results.Add(new Result(item.id, width, height, item.images.original.webp));
+            Results.Add(new Result(item.id, width, height, item.images.original.webp, null, null));
         }
     }
 }

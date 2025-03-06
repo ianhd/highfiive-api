@@ -40,6 +40,9 @@ public class PexelsService
             case 2:
                 searchQueries = "flowers";
                 break;
+            case 3:
+                searchQueries = "hot air balloons,gratitude";
+                break;
         }
         foreach(var query in searchQueries.Split(',').ToList())
         {

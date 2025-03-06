@@ -1,6 +1,5 @@
-﻿using System.Data;
-using Dapper;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Api;
 

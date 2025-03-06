@@ -22,13 +22,6 @@ public class PexelsController : ControllerBase
         return Ok(new SearchResultsPageV2(data, q));
     }
 
-    [HttpGet("pexels/collection"), AllowAnonymous]
-    public async Task<IActionResult> GetCollectionV2(int occasionId)
-    {
-        var data = await _pexelsService.GetCollection("zvfgiyn");
-        return Ok(new SearchResultsPageV2(data));
-    }
-
     [HttpGet("pexels/occasion-collections"), AllowAnonymous]
     public async Task<IActionResult> GetOccasionCollections(int occasionId)
     {
