@@ -48,6 +48,18 @@ public class BoardRepo : _BaseRepo
         ", new { user_id })).ToList();
     }
 
+    public async Task<List<Board>> GetAllAdmin()
+    {
+        using var conn = _context.CreateConnection();
+        return (await conn.QueryAsync<Board>(@"
+            select b.board_id, b.first_name, b.last_name, b.pexels_photo_id, b.title, b.date_created, count(p.board_id) as num_posts
+            from board b
+                left join post p on p.board_id = b.board_id
+            group by b.board_id, b.first_name, b.last_name, b.pexels_photo_id, b.title, b.date_created
+            order by date_created desc
+        ")).ToList();
+    }
+
     public async Task<Board> Insert(Board item)
     {
         using var conn = _context.CreateConnection();

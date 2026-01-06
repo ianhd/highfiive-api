@@ -40,6 +40,24 @@ namespace Api.Services
             return data;
         }
 
+        public async Task<List<Board>> GetAllAdmin()
+        {
+            var data = await _boardRepo.GetAllAdmin();
+            var photos = new Dictionary<int, PexelsPhoto>();
+
+            // load portraits for each board (pexels)
+            foreach (var b in data)
+            {
+                if (photos.ContainsKey(b.pexels_photo_id)) continue;
+                var photo = await _pexelsService.GetPhoto(b.pexels_photo_id);
+                photos.Add(b.pexels_photo_id, photo);
+
+                b.pexels_photo = photos[b.pexels_photo_id];
+            }
+
+            return data;
+        }
+
         public async Task<string> DbPing()
         {
             var count = await _boardRepo.DbPing();

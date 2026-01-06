@@ -43,4 +43,14 @@ public class BoardController : ControllerBase
         var user_id = (int)Request.HttpContext.Items["UserId"];
         return Ok(await _boardService.GetAll(user_id));
     }
+
+    [HttpGet("boards-admin")]
+    public async Task<IActionResult> GetAllBoardsAdmin()
+    {
+        var user_id = (int)Request.HttpContext.Items["UserId"];
+        if (user_id != 1) {             
+            throw new Exception("Not authorized");
+        }
+        return Ok(await _boardService.GetAllAdmin());
+    }
 }
