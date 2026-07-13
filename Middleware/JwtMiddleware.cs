@@ -31,7 +31,8 @@ public class JwtMiddleware
         if (string.IsNullOrEmpty(authVal))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            throw new Exception("Not authorized");
+            //throw new Exception("Not authorized");
+            return;
         }
 
         // parse out jwt
@@ -41,7 +42,8 @@ public class JwtMiddleware
         if (!userId.HasValue)
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            throw new Exception("Not authorized");
+            //throw new Exception("Not authorized");
+            return;
         }
 
         context.Items.Add("UserId", userId.Value);

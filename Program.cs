@@ -86,6 +86,8 @@ services.AddSingleton<PostService>();
 services.AddSingleton<GiphyService>();
 
 var app = builder.Build();
+
+app.UseRouting();
 app.UseCors();
 
 app.UseSwagger();
@@ -100,6 +102,6 @@ app.UseHttpsRedirection();
 app.UseMiddleware<JwtMiddleware>();
 //app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.Run();
