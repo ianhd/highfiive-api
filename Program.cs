@@ -87,6 +87,8 @@ services.AddSingleton<GiphyService>();
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
 app.UseRouting();
 app.UseCors();
 

@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <StdOutLogEnabled>true</StdOutLogEnabled>
+    <StdOutLogFile>.\logs\stdout</StdOutLogFile>
   </PropertyGroup>
 
   <ItemGroup>
