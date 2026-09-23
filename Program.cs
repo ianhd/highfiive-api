@@ -100,7 +100,9 @@ app.UseCors();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/health", () => Results.Ok(new { status = "ok" })).AllowAnonymous();
+app.MapGet("/health", (SiteSettings siteSettings) =>
+    Results.Text($"OK! SiteSettings.SiteUrl from appsettings.json is {siteSettings.SiteUrl}"))
+    .AllowAnonymous();
 
 _ServiceLocator.Init(app.Services);
 AppDependencyResolver.Init(app.Services);
