@@ -11,6 +11,11 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile(
+    "/etc/secrets/appsettings.json",
+    optional: true,
+    reloadOnChange: false);
+
 // Add services to the container.
 var services = builder.Services;
 
@@ -94,6 +99,8 @@ app.UseCors();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapGet("/health", () => Results.Ok(new { status = "ok" })).AllowAnonymous();
 
 _ServiceLocator.Init(app.Services);
 AppDependencyResolver.Init(app.Services);
